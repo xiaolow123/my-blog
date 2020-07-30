@@ -1,0 +1,12 @@
+var router = require('koa-router')()
+var signup = require('./signup')
+var login = require('./login')
+var articles = require('./articles')
+var comment = require('./comment')
+var user = require('./user')
+router.use('/signup', signup.routes(), signup.allowedMethods())
+router.use('/login', login.routes(), login.allowedMethods())
+router.use('/articles', articles.routes(), articles.allowedMethods())
+router.use('/comment', comment.routes(), comment.allowedMethods())
+router.use('/user', user.routes(), user.allowedMethods())
+module.exports = router
