@@ -1,12 +1,12 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import signup from '@/components/signup/signup'
-import login from '@/components/login/login'
-import arti from '@/components/arti/arti'
-import essay from '@/components/essay/essay'
-import archive from '@/components/archive/archive'
-import contents from '@/components/contents/contents'
-import userinfo from '@/components/userinfo/userinfo'
+const signup = () => import('@/components/signup/signup')
+const login = () => import('@/components/login/login')
+const arti = () => import('@/components/arti/arti')
+const essay = () => import('@/components/essay/essay')
+const archive = () => import('@/components/archive/archive')
+const contents = () => import('@/components/contents/contents')
+const userinfo = () => import('@/components/userinfo/userinfo')
 const originalPush = Router.prototype.push
 Router.prototype.push = function push (location, onResolve, onReject) {
   if (onResolve || onReject) return originalPush.call(this, location, onResolve, onReject)
@@ -17,7 +17,11 @@ Vue.use(Router)
 export default new Router({
   routes: [
     {
-      path: '',
+      path: '/',
+      redirect: '/contents'
+    },
+    {
+      path: '/contents',
       component: contents
     },
     {

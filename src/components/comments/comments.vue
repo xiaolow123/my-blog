@@ -20,6 +20,7 @@
 <script>
 import axios from 'axios'
 import {datetransfer} from '@/common/js/date'
+import xssfilter from '@/common/js/xssfilter'
 export default {
   name: 'comments',
   props: {
@@ -49,6 +50,7 @@ export default {
       var res2 = await axios.get(`/api/user/?userId=${data[i].userId}`)
       data[i].name = res2.data[0].name
       data[i].date = datetransfer(new Date(data[i].created_at))
+      data[i].content = xssfilter(data[i].content)
     }
     this.comments = res.data
     this.commentslength = res.data.length

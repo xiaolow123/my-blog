@@ -30,6 +30,13 @@ import 'tinymce/plugins/lists'// 列表插件
 import 'tinymce/plugins/wordcount'// 字数统计插件
 import 'tinymce/plugins/codesample'
 export default {
+  beforeRouteEnter (to, from, next) {
+    if (localStorage.myget('user').name !== '123456') {
+      alert('权限不足')
+    } else {
+      next()
+    }
+  },
   methods: {
     submit () {
       let _this = this

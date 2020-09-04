@@ -17,6 +17,7 @@
 
 <script>
 import axios from 'axios'
+import debounce from '@/common/js/debounce'
 axios.defaults.withCredentials = true
 export default {
   name: 'login',
@@ -28,7 +29,7 @@ export default {
     }
   },
   methods: {
-    login () {
+    _login () {
       let _this = this
       axios.post('/api/login', {
         name: _this.name,
@@ -40,12 +41,14 @@ export default {
         } else {
           alert('登录成功')
           localStorage.myset('user', JSON.stringify(res.data[0]), 10000000)
-          console.log(localStorage.myget('user'))
           _this.$router.push('/')
         }
       }).catch((e) => {
         console.log(e)
       })
+    },
+    login () {
+      debounce(this._login, 1000)()
     },
     gotosignup () {
       this.$router.push('/signup')

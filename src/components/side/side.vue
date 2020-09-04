@@ -7,16 +7,16 @@
     <div class='secondline'></div>
     <div class='functions-wrapper'>
       <div class='functions'>
-        <div class='function' @click='gohome'>首页</div>
-        <div class='function' @click="login" v-if='!logined'>登录</div>
+        <router-link class='function' to='/contents'><span>首页</span></router-link>
+        <router-link class='function' to='/login'><span>登录</span></router-link>
         <div class='function' @click="unlogin" v-if='logined'>登出</div>
-        <div class='function' @click='archive'>归档</div>
+        <router-link class='function' to='/archive'><span>归档</span></router-link>
       </div>
     </div>
     <div class='functions-wrapper2'>
       <div class='functions'>
-        <div class='function' @click='gouserinfo'>个人中心</div>
-        <div class='function' @click='goarti'>写文章</div>
+        <router-link class='function' to='/userinfo'><span>个人中心</span></router-link>
+        <router-link class='function' to='/arti'><span>写文章</span></router-link>
       </div>
     </div>
   </div>
@@ -34,24 +34,9 @@ export default {
     }
   },
   methods: {
-    goarti () {
-      this.$router.push('/arti')
-    },
-    gouserinfo () {
-      this.$router.push('/userinfo')
-    },
-    archive () {
-      this.$router.push('/archive')
-    },
     unlogin () {
       localStorage.removeItem('user')
       this.logined = false
-    },
-    login () {
-      this.$router.push('/login')
-    },
-    gohome () {
-      this.$router.push('/')
     }
   },
   data () {
@@ -127,6 +112,8 @@ export default {
       transform translateX(-50%)
       display flex
       align-items center
+      .router-link-active
+        background-color:$background-theme
       .function
         border-radius 20px
         padding 10px
@@ -148,6 +135,8 @@ export default {
       transform translateX(-50%)
       display flex
       align-items center
+      .router-link-active
+        background-color:$background-theme
       .function
         border-radius 20px
         padding 12px

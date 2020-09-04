@@ -21,6 +21,7 @@
 import axios from 'axios'
 import comments from '@/components/comments/comments'
 import {datetransfer} from '../../common/js/date'
+import xssfilter from '@/common/js/xssfilter'
 import tinymce from 'tinymce/tinymce'
 import Editor from '@tinymce/tinymce-vue'
 import 'tinymce/themes/silver'
@@ -79,7 +80,7 @@ export default {
       'created_at': _this.ms,
       'title': _this.title
     }).then((res) => {
-      _this.text = res.data[0].text
+      _this.text = xssfilter(res.data[0].text)
       _this.tags = res.data[0].tags
       _this.id = res.data[0]._id
       _this.readcount = res.data[0].readcount

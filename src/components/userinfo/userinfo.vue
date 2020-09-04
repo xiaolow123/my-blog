@@ -3,15 +3,13 @@
     <div class='wrapper' @click='hidecalendar'>
       <div class='header'>
         <div class='header-option'>资料设置</div>
-        <div class='header-option'>账号设置</div>
-        <div class='header-option'>邮件设置</div>
       </div>
       <div class='content'>
         <div class='item'>
           <span>头像</span>
-          <input type='file'>
+          <input type='file' ref='myfile'>
         </div>
-        <div class='item'>
+        <div class='item' @click="fileval">
           <span>昵称</span>
           <input class='normal'>
         </div>
@@ -28,36 +26,40 @@
                     ></Calendar>
         </div>
         <div class='item'>
-          <span>性别</span>
-          <input type='radio' value='男' name='name' class='radio'>男
-          <input type='radio' value='女' name='name' class='radio'>女
-        </div>
-        <div class='item'>
-          <span>身份</span>
-          <input type='radio' value='学生' name='identification' class='radio'>学生
-          <input type='radio' value='在职' name='identification' class='radio'>在职
-          <input type='radio' value='其他' name='identification' class='radio'>其他
+          <span class='signaturex'>个人简介</span>
+          <textarea v-model='signature' cols='50' class='signature'></textarea>
         </div>
       </div>
+      <div class='button' @click="complete">完成</div>
     </div>
   </div>
 </template>
 
 <script>
 import Calendar from 'vue-calendar-component'
-
+import axios from 'axios'
 export default {
   name: 'userinfo',
   data () {
     return {
       birthday: '',
-      ifcalendar: false
+      ifcalendar: false,
+      avatar: '',
+      signature: ''
     }
   },
   components: {
     Calendar
   },
   methods: {
+    complete () {
+      axios.post('/user', {
+
+      })
+    },
+    fileval () {
+      console.log(this.avatar)
+    },
     hidecalendar () {
       this.ifcalendar = false
     },
@@ -116,6 +118,24 @@ export default {
           width:300px
         .radio
           margin-left:20px
+        .signaturex
+          position absolute
+          top 0
+        .signature
+          border:1px solid #aaa
+          width:300px
+          margin-left:85px
+          resize:none
+          height:200px
+    .button
+      position absolute
+      left 50%
+      bottom:15%
+      transform translateX(-50%)
+      padding:20px
+      border-radius:15px
+      color:#fff
+      background-color $background-theme
 >>> .calendar
   position: absolute
   top:35px

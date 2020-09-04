@@ -43,7 +43,9 @@ Storage.prototype.myget = function (key) {
   }
   return JSON.parse(val.value)
 }
+
 /* eslint-disable no-new */
+
 new Vue({
   el: '#app',
   router,
